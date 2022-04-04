@@ -15,13 +15,12 @@ public class ConsoleProgress implements Runnable{
                 Thread.sleep(500);
                 System.out.print("\r Loading...|." + "/");
             } catch (InterruptedException e) {
-                e.printStackTrace();
                 Thread.currentThread().interrupt();
             }
         }
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
         Thread.sleep(1550);
