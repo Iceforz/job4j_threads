@@ -9,7 +9,7 @@ public class ConsoleProgress implements Runnable{
         String[] chars = {"\\", "|", "/"};
         int index = 0;
         while (!Thread.currentThread().isInterrupted()) {
-            if (index == 3) {
+            if (index == chars.length) {
                 index = 0;
             }
                 try {
