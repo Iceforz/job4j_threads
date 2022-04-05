@@ -11,7 +11,7 @@ public class Wget implements Runnable {
     private final String fileName;
     private final int speed;
 
-    public Wget(String url, String fileName, int speed) {
+    public Wget(String url,  String fileName, int speed) {
         this.url = url;
         this.fileName = fileName;
         this.speed = speed;
@@ -19,21 +19,25 @@ public class Wget implements Runnable {
 
     @Override
     public void run() {
-        try (BufferedInputStream in = new BufferedInputStream(new URL(this.url).openStream());
+
+        try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
             FileOutputStream fileOutputStream = new FileOutputStream(fileName)) {
-                byte[] dataBuffer = new byte[1024];
+                byte[] dataBuffer = new byte[speed];
                 int bytesRead;
                 long start = System.currentTimeMillis();
-            while ((bytesRead = in.read(dataBuffer, 0 ,1024)) !=-1) {
+                int downloadDAta = 0;
+            while ((bytesRead = in.read(dataBuffer, 0 ,speed)) !=-1) {
                     fileOutputStream.write(dataBuffer, 0, bytesRead);
-                    if (bytesRead >= speed) {
+                    downloadDAta += bytesRead;
+                    if (downloadDAta >= speed) {
                         long finish = System.currentTimeMillis();
                         long time = finish - start;
                         if (time < 1000) {
                             Thread.sleep(1000 - time);
-                            start = System.currentTimeMillis();
                         }
                     }
+                    downloadDAta = 0;
+                            start = System.currentTimeMillis();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -42,10 +46,19 @@ public class Wget implements Runnable {
             }
         }
 
+    private static class ValidateArgs {
+        private static void validate(String[] args) {
+            if (args.length != 3) {
+                throw new IllegalArgumentException("Некоректный ввод аргументов");
+            }
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
+        ValidateArgs.validate(args);
         String url = args[0];
-        String filename = args[1];
-        int speed = Integer.parseInt(args[2]);
+         String filename = args[1];
+        int speed = Integer.parseInt(args[2]) * 1048576;
         Thread wget = new Thread(new Wget(url, filename, speed));
         wget.start();
         wget.join();
