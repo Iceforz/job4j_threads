@@ -15,10 +15,9 @@
         <scope>test</scope>
     </dependency>
         <dependency>
-            <groupId>com.GitHub.stephenc.jcip</groupId>
+            <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>
-            <version>1.0-1</version>
-            <scope>compile</scope>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
