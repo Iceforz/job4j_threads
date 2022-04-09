@@ -1,10 +1,11 @@
 package io;
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import junit.framework.TestCase;
 
-public class CountTest extends TestCase {
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+
+public class CountTest {
     /**
      * Класс описывает нить со счетчиком.
      */
