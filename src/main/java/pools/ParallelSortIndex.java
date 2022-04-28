@@ -1,10 +1,10 @@
 package pools;
 
-import java.lang.reflect.Type;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class ParallelSortIndex extends RecursiveTask<Integer> {
+
     private final Integer[] array;
     private final int from;
     private final int to;
