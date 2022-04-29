@@ -18,12 +18,15 @@ public class ParallelSortIndex extends RecursiveTask<Integer> {
     }
 
     public Integer findIndex() {
-        for (int i = from; i <= to; i++) {
-            if (obj.equals(array[i])) {
-                return array[i];
+        Integer rsl = -1;
+        if (array != null) {
+            for (int i = from; i < to; i++) {
+                if (obj.equals(array[i])) {
+                    return i;
+                }
             }
         }
-        return -1;
+        return rsl;
     }
 
     @Override
@@ -32,8 +35,8 @@ public class ParallelSortIndex extends RecursiveTask<Integer> {
         return findIndex();
     }
     int mid = (from + to) / 2;
-        ParallelSortIndex left = new  ParallelSortIndex(array, from, mid, obj);
-        ParallelSortIndex right = new  ParallelSortIndex(array, mid + 1, to, obj);
+        ParallelSortIndex left = new ParallelSortIndex(array, from, mid, obj);
+        ParallelSortIndex right = new ParallelSortIndex(array, mid + 1, to, obj);
         left.fork();
         right.fork();
         return Math.max(left.join(), right.join());
