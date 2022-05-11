@@ -14,6 +14,9 @@ Maven
 >
 >Telegram: @iceforz
 
+В курсе производилась работа с ветками git.
+
+Слияние веток
 #change README.md
 
 
